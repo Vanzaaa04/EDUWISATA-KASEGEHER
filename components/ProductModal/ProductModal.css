@@ -1,0 +1,204 @@
+/* ============================================
+   PRODUCT MODAL — Popup detail produk
+   ============================================ */
+
+/* Backdrop gelap */
+.product-modal__backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Container modal */
+.product-modal {
+  position: relative;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: modalSlideUp 0.3s ease;
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tombol close */
+.product-modal__close {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-full);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.product-modal__close:hover {
+  background: var(--color-text);
+  color: var(--color-white);
+}
+
+/* Body modal: 2 kolom (gambar + detail) */
+.product-modal__body {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .product-modal__body {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Gambar produk */
+.product-modal__image-wrapper {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+@media (min-width: 768px) {
+  .product-modal__image-wrapper {
+    height: 100%;
+    min-height: 500px;
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  }
+}
+
+.product-modal__image {
+  object-fit: cover;
+}
+
+/* Detail produk */
+.product-modal__details {
+  padding: var(--space-lg);
+  overflow-y: auto;
+}
+
+.product-modal__emoji {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.product-modal__name {
+  font-size: var(--fs-h2);
+  font-weight: 800;
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+
+.product-modal__tagline {
+  font-family: var(--font-heading);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-bottom: var(--space-sm);
+}
+
+.product-modal__description {
+  font-size: 0.95rem;
+  color: var(--color-text-light);
+  line-height: 1.8;
+  margin-bottom: var(--space-md);
+}
+
+/* Section komposisi & manfaat */
+.product-modal__section {
+  margin-bottom: var(--space-md);
+}
+
+.product-modal__section:last-child {
+  margin-bottom: 0;
+}
+
+.product-modal__section-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: var(--space-xs);
+}
+
+/* List item */
+.product-modal__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.product-modal__list li {
+  position: relative;
+  font-size: var(--fs-small);
+  color: var(--color-text-light);
+  line-height: 1.6;
+  padding-left: 18px;
+  margin-bottom: 4px;
+}
+
+.product-modal__list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  font-weight: bold;
+}
+
+.product-modal__list--benefits li::before {
+  content: '✓';
+  color: var(--color-primary);
+}
+
+/* Scrollbar styling */
+.product-modal::-webkit-scrollbar {
+  width: 6px;
+}
+
+.product-modal::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.product-modal::-webkit-scrollbar-thumb {
+  background: var(--color-border-light);
+  border-radius: var(--radius-full);
+}

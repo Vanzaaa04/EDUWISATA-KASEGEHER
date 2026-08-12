@@ -1,0 +1,52 @@
+/* ============================================
+   STAT CARD — Card statistik desa
+   ============================================ */
+
+.stat-card {
+  background: var(--color-white);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-sm);
+  text-align: center;
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition-base);
+  border: 1px solid var(--color-border-light);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Ikon */
+.stat-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-bg);
+  color: var(--color-primary);
+  margin-bottom: var(--space-sm);
+}
+
+/* Angka statistik */
+.stat-card__value {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h2);
+  font-weight: 800;
+  color: var(--color-primary);
+  margin-bottom: var(--space-xs);
+}
+
+.stat-card__suffix {
+  font-size: var(--fs-h4);
+  font-weight: 600;
+}
+
+/* Label deskripsi */
+.stat-card__label {
+  font-size: var(--fs-small);
+  color: var(--color-text-light);
+  font-weight: 500;
+}

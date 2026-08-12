@@ -1,0 +1,124 @@
+/* ============================================
+   RUTE & LOKASI — Halaman denah + navigasi
+   ============================================ */
+
+/* === HERO BANNER === */
+.rute-hero {
+  position: relative;
+  padding: calc(var(--nav-height) + var(--space-2xl)) 0 var(--space-2xl);
+  overflow: hidden;
+}
+
+.rute-hero__bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-dark) 0%,
+    var(--color-primary) 50%,
+    var(--color-primary-light) 100%
+  );
+}
+
+.rute-hero__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.rute-hero__title {
+  font-size: var(--fs-hero);
+  font-weight: 800;
+  color: var(--color-white);
+  margin-bottom: var(--space-xs);
+}
+
+.rute-hero__subtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 550px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* === DENAH WISATA === */
+.rute-denah {
+  background: var(--color-white);
+}
+
+.rute-denah__card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-border-light);
+}
+
+.rute-denah__image-wrapper {
+  position: relative;
+}
+
+.rute-denah__image {
+  display: block;
+}
+
+/* === INFO ALAMAT + TOMBOL MAPS === */
+.rute-info {
+  background: var(--color-primary-bg);
+}
+
+.rute-info__card {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border-light);
+}
+
+.rute-info__icon {
+  color: var(--color-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.rute-info__title {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-xs);
+}
+
+.rute-info__address {
+  font-size: 1.05rem;
+  color: var(--color-text-light);
+  line-height: 1.7;
+  margin-bottom: var(--space-lg);
+}
+
+.rute-info__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  font-size: 1rem;
+  margin-bottom: var(--space-md);
+}
+
+.rute-info__hint {
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.rute-info__link {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: underline;
+  transition: color var(--transition-fast);
+}
+
+.rute-info__link:hover {
+  color: var(--color-accent);
+}

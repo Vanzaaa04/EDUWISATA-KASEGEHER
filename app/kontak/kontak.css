@@ -1,0 +1,128 @@
+/* ============================================
+   KONTAK — Halaman hubungi kami
+   ============================================ */
+
+/* === HERO BANNER === */
+.kontak-hero {
+  position: relative;
+  padding: calc(var(--nav-height) + var(--space-2xl)) 0 var(--space-2xl);
+  overflow: hidden;
+}
+
+.kontak-hero__bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-dark) 0%,
+    var(--color-primary) 60%,
+    var(--color-primary-light) 100%
+  );
+}
+
+.kontak-hero__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.kontak-hero__title {
+  font-size: var(--fs-hero);
+  font-weight: 800;
+  color: var(--color-white);
+  margin-bottom: var(--space-xs);
+}
+
+.kontak-hero__subtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 550px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* === BODY: 2 KOLOM === */
+.kontak-body {
+  background: var(--color-primary-bg);
+}
+
+.kontak-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+}
+
+@media (min-width: 768px) {
+  .kontak-layout {
+    grid-template-columns: 1fr 1.2fr;
+    align-items: start;
+  }
+}
+
+/* === INFO KONTAK === */
+.kontak-info {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border-light);
+}
+
+.kontak-info__title {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-xs);
+}
+
+.kontak-info__desc {
+  font-size: var(--fs-small);
+  color: var(--color-text-light);
+  margin-bottom: var(--space-lg);
+  line-height: 1.7;
+}
+
+/* Item info kontak */
+.kontak-info__item {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.kontak-info__item:last-child {
+  margin-bottom: 0;
+}
+
+.kontak-info__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-bg);
+  color: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.kontak-info__label {
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 2px;
+}
+
+.kontak-info__value {
+  font-size: var(--fs-small);
+  color: var(--color-text-light);
+  line-height: 1.6;
+}
+
+/* === FORM WRAPPER === */
+.kontak-form-wrapper {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border-light);
+}

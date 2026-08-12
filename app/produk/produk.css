@@ -1,0 +1,177 @@
+/* ============================================
+   PRODUK — Halaman katalog produk herbal
+   ============================================ */
+
+/* === HERO BANNER === */
+.produk-hero {
+  position: relative;
+  padding: calc(var(--nav-height) + var(--space-2xl)) 0 var(--space-2xl);
+  overflow: hidden;
+}
+
+.produk-hero__bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-dark) 0%,
+    var(--color-primary) 50%,
+    var(--color-accent-dark) 100%
+  );
+}
+
+.produk-hero__bg::before {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  left: -10%;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.produk-hero__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.produk-hero__title {
+  font-size: var(--fs-hero);
+  font-weight: 800;
+  color: var(--color-white);
+  margin-bottom: var(--space-xs);
+}
+
+.produk-hero__subtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* === GRID PRODUK === */
+.produk-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+@media (min-width: 640px) {
+  .produk-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .produk-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* === PRODUK CARD (versi halaman, lebih besar dari preview) === */
+.produk-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-white);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border-light);
+  transition: all var(--transition-base);
+  cursor: pointer;
+  outline: none;
+}
+
+.produk-card:hover,
+.produk-card:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.produk-card:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Gambar produk */
+.produk-card__image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .produk-card__image-wrapper {
+    height: 260px;
+  }
+}
+
+.produk-card__image {
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.produk-card:hover .produk-card__image {
+  transform: scale(1.08);
+}
+
+/* Overlay "Lihat Detail" saat hover */
+.produk-card__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0);
+  transition: background var(--transition-base);
+}
+
+.produk-card:hover .produk-card__overlay {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.produk-card__view {
+  display: inline-block;
+  padding: 8px 20px;
+  background: var(--color-white);
+  color: var(--color-primary);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--fs-small);
+  border-radius: var(--radius-full);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all var(--transition-base);
+}
+
+.produk-card:hover .produk-card__view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Konten produk */
+.produk-card__content {
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.produk-card__emoji {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.produk-card__name {
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+
+.produk-card__tagline {
+  font-size: var(--fs-small);
+  color: var(--color-text-light);
+  line-height: 1.5;
+}

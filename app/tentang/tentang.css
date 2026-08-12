@@ -1,0 +1,189 @@
+/* ============================================
+   TENTANG DESA — Halaman profil desa lengkap
+   ============================================ */
+
+/* === HERO BANNER === */
+.tentang-hero {
+  position: relative;
+  height: 50vh;
+  min-height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.tentang-hero__image-wrapper {
+  position: absolute;
+  inset: 0;
+}
+
+.tentang-hero__image {
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+/* Overlay gelap untuk kontras teks */
+.tentang-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0.3) 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+.tentang-hero__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding-top: var(--nav-height);
+}
+
+.tentang-hero__title {
+  font-size: var(--fs-hero);
+  font-weight: 800;
+  color: var(--color-white);
+  margin-bottom: var(--space-xs);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.tentang-hero__subtitle {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h4);
+  color: var(--color-accent-light);
+  font-weight: 500;
+}
+
+/* === NARASI PEMBUKA === */
+.tentang-narasi {
+  background: var(--color-white);
+}
+
+.tentang-narasi__content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.tentang-narasi__text {
+  font-size: 1.1rem;
+  line-height: 1.9;
+  color: var(--color-text-light);
+  margin-bottom: var(--space-md);
+}
+
+.tentang-narasi__text:last-child {
+  margin-bottom: 0;
+}
+
+/* === STATISTIK DESA === */
+.tentang-stats {
+  background: var(--color-primary-bg);
+}
+
+.tentang-stats__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+@media (min-width: 768px) {
+  .tentang-stats__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .tentang-stats__grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+.tentang-stats__note {
+  text-align: center;
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* === POTENSI UNGGULAN === */
+.tentang-potensi {
+  background: var(--color-white);
+}
+
+.tentang-potensi__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+}
+
+@media (min-width: 768px) {
+  .tentang-potensi__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .tentang-potensi__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Card potensi */
+.tentang-potensi__card {
+  background: var(--color-primary-bg);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg) var(--space-md);
+  text-align: center;
+  border: 1px solid var(--color-border-light);
+  transition: all var(--transition-base);
+}
+
+.tentang-potensi__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--color-primary-light);
+}
+
+.tentang-potensi__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));
+  color: var(--color-white);
+  margin-bottom: var(--space-sm);
+}
+
+.tentang-potensi__title {
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-xs);
+}
+
+.tentang-potensi__desc {
+  font-size: var(--fs-small);
+  color: var(--color-text-light);
+  line-height: 1.7;
+}
+
+/* === MOBILE === */
+@media (max-width: 767px) {
+  .tentang-hero {
+    height: 40vh;
+    min-height: 280px;
+  }
+
+  .tentang-narasi__text {
+    font-size: 1rem;
+    text-align: left;
+  }
+}

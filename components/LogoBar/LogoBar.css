@@ -1,0 +1,106 @@
+/* ============================================
+   LOGO BAR — Baris logo mitra/pendukung
+   Desain: Full color + Tooltip on hover
+   ============================================ */
+
+.logo-bar {
+  background: var(--color-white);
+  border-top: 1px solid var(--color-border-light);
+}
+
+/* Label "DIDUKUNG OLEH" */
+.logo-bar__label {
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: var(--space-xl);
+}
+
+/* Grid logo — responsive flex */
+.logo-bar__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-xl);
+}
+
+/* === ITEM LOGO === */
+.logo-bar__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  /* Background putih untuk menutupi artifak kotak-kotak di JPEG */
+  background: var(--color-white);
+  padding: 6px;
+  border-radius: var(--radius-sm);
+}
+
+/* Efek hover — naik sedikit + sedikit membesar */
+.logo-bar__item:hover {
+  transform: translateY(-4px) scale(1.08);
+}
+
+/* === GAMBAR LOGO === */
+.logo-bar__image {
+  object-fit: contain;
+  /* Tanpa grayscale — full color langsung */
+  transition: transform var(--transition-base);
+}
+
+/* === TOOLTIP === */
+.logo-bar__tooltip {
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--color-text);
+  color: var(--color-white);
+  font-size: 0.72rem;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-fast);
+  pointer-events: none;
+}
+
+/* Segitiga kecil di atas tooltip */
+.logo-bar__tooltip::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid var(--color-text);
+}
+
+/* Tampilkan tooltip saat hover */
+.logo-bar__item:hover .logo-bar__tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* === RESPONSIF === */
+@media (max-width: 767px) {
+  .logo-bar__grid {
+    gap: var(--space-md);
+  }
+
+  /* Mobile: tooltip di bawah terlalu sempit, sembunyikan */
+  .logo-bar__tooltip {
+    display: none;
+  }
+}

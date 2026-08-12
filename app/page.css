@@ -1,0 +1,62 @@
+/* ============================================
+   BERANDA (HOME) — Layout halaman utama
+   ============================================ */
+
+/* === SECTION UMUM === */
+.home-section {
+  padding: var(--space-2xl) 0;
+}
+
+/* Background alternating */
+.home-section--about {
+  background: var(--color-white);
+}
+
+.home-section--destinations {
+  background: var(--color-primary-bg);
+}
+
+.home-section--products {
+  background: var(--color-white);
+}
+
+/* === GRID STATISTIK (4 kolom) === */
+.home-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .home-stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-md);
+  }
+}
+
+/* === GRID CARDS (3 kolom untuk destinasi & produk) === */
+.home-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .home-cards-grid--3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-cards-grid--3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* === CTA BUTTON DI BAWAH SECTION === */
+.home-section__cta {
+  text-align: center;
+  margin-top: var(--space-sm);
+}

@@ -1,0 +1,84 @@
+/* ============================================
+   DESTINATION CARD — Card preview destinasi
+   ============================================ */
+
+.destination-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-white);
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition-base);
+  border: 1px solid var(--color-border-light);
+}
+
+.destination-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Wrapper gambar */
+.destination-card__image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+}
+
+.destination-card__image {
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.destination-card:hover .destination-card__image {
+  transform: scale(1.08);
+}
+
+/* Overlay gradient di bawah gambar */
+.destination-card__image-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.2));
+}
+
+/* Konten teks */
+.destination-card__content {
+  padding: var(--space-md);
+}
+
+.destination-card__title {
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-xs);
+}
+
+.destination-card__desc {
+  font-size: var(--fs-small);
+  color: var(--color-text-light);
+  line-height: 1.6;
+  margin-bottom: var(--space-sm);
+}
+
+.destination-card__link {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--fs-small);
+  color: var(--color-primary);
+  transition: color var(--transition-fast);
+  text-decoration: none;
+}
+
+.destination-card__link:hover {
+  color: var(--color-accent);
+}
+
+/* Responsif — Tinggi gambar pada tablet */
+@media (min-width: 768px) {
+  .destination-card__image-wrapper {
+    height: 240px;
+  }
+}

@@ -1,0 +1,82 @@
+/* ============================================
+   PRODUCT CARD — Card preview produk herbal
+   ============================================ */
+
+.product-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-white);
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition-base);
+  border: 1px solid var(--color-border-light);
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Wrapper gambar */
+.product-card__image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: var(--color-primary-bg);
+}
+
+.product-card__image {
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.product-card:hover .product-card__image {
+  transform: scale(1.08);
+}
+
+/* Konten teks */
+.product-card__content {
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.product-card__emoji {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: var(--space-xs);
+}
+
+.product-card__name {
+  font-size: var(--fs-h4);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 4px;
+}
+
+.product-card__tagline {
+  font-size: var(--fs-small);
+  color: var(--color-text-light);
+  line-height: 1.5;
+  margin-bottom: var(--space-sm);
+}
+
+.product-card__link {
+  display: inline-block;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--fs-small);
+  color: var(--color-primary);
+  transition: color var(--transition-fast);
+  text-decoration: none;
+}
+
+.product-card__link:hover {
+  color: var(--color-accent);
+}
+
+/* Responsif */
+@media (min-width: 768px) {
+  .product-card__image-wrapper {
+    height: 220px;
+  }
+}

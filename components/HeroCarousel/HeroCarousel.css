@@ -1,0 +1,211 @@
+/* ============================================
+   HERO CAROUSEL — Slideshow utama Beranda
+   ============================================ */
+
+.hero-carousel {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+/* === SLIDE === */
+.hero-carousel__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease;
+  pointer-events: none;
+}
+
+.hero-carousel__slide--active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Background image + Ken Burns zoom effect */
+.hero-carousel__image-wrapper {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-carousel__image {
+  object-fit: cover;
+  animation: kenBurns 20s ease infinite alternate;
+}
+
+@keyframes kenBurns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+
+/* Overlay gelap untuk kontras teks */
+.hero-carousel__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.2) 40%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+  z-index: 1;
+}
+
+/* === KONTEN TEKS === */
+.hero-carousel__content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-top: var(--nav-height);
+}
+
+.hero-carousel__title {
+  font-size: var(--fs-hero);
+  font-weight: 800;
+  color: var(--color-white);
+  margin-bottom: var(--space-xs);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.hero-carousel__subtitle {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h3);
+  font-weight: 500;
+  color: var(--color-accent-light);
+  margin-bottom: var(--space-md);
+}
+
+.hero-carousel__description {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 650px;
+  margin: 0 auto var(--space-lg);
+  line-height: 1.8;
+}
+
+.hero-carousel__actions {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Tombol outline putih untuk hero */
+.hero-carousel__btn-outline {
+  border-color: var(--color-white) !important;
+  color: var(--color-white) !important;
+}
+
+.hero-carousel__btn-outline:hover {
+  background: var(--color-white) !important;
+  color: var(--color-primary) !important;
+}
+
+/* === TOMBOL PANAH === */
+.hero-carousel__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-full);
+  color: var(--color-white);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  opacity: 0;
+}
+
+.hero-carousel:hover .hero-carousel__arrow {
+  opacity: 1;
+}
+
+.hero-carousel__arrow:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.hero-carousel__arrow--left {
+  left: var(--space-md);
+}
+
+.hero-carousel__arrow--right {
+  right: var(--space-md);
+}
+
+/* === DOT INDICATOR === */
+.hero-carousel__dots {
+  position: absolute;
+  bottom: var(--space-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.hero-carousel__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  padding: 0;
+}
+
+.hero-carousel__dot--active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  width: 32px;
+  border-radius: var(--radius-full);
+}
+
+.hero-carousel__dot:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* === MOBILE RESPONSIVE === */
+@media (max-width: 767px) {
+  .hero-carousel {
+    min-height: 500px;
+  }
+
+  .hero-carousel__description {
+    font-size: var(--fs-small);
+    padding: 0 var(--space-sm);
+  }
+
+  .hero-carousel__arrow {
+    width: 40px;
+    height: 40px;
+    opacity: 1;
+  }
+
+  .hero-carousel__arrow--left {
+    left: var(--space-xs);
+  }
+
+  .hero-carousel__arrow--right {
+    right: var(--space-xs);
+  }
+}
