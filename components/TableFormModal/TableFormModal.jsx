@@ -6,16 +6,25 @@ import './TableFormModal.css';
 
 /**
  * TableFormModal — Modal untuk membuat atau mengedit tabel data.
- * Admin bisa menentukan judul tabel dan judul-judul kolom (bebas).
+ * Admin bisa menentukan judul tabel dan kolom-kolom beserta tipe datanya.
+ * Tipe kolom: 'text' (teks bebas), 'date' (kalender), 'number' (angka)
  * Props:
  * - isOpen: boolean
  * - onClose: fungsi untuk menutup modal
  * - onSave: fungsi(title, columns) untuk menyimpan
  * - editTable: objek tabel yang sedang diedit (null jika buat baru)
  */
+
+// Pilihan tipe kolom
+const COLUMN_TYPES = [
+  { value: 'text', label: '✏️ Teks' },
+  { value: 'date', label: '📅 Tanggal' },
+  { value: 'number', label: '🔢 Angka' },
+];
+
 export default function TableFormModal({ isOpen, onClose, onSave, editTable }) {
   const [title, setTitle] = useState('');
-  const [columns, setColumns] = useState(['']);
+  const [columns, setColumns] = useState([{ name: '', type: 'text' }]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -23,10 +32,17 @@ export default function TableFormModal({ isOpen, onClose, onSave, editTable }) {
   useEffect(() => {
     if (editTable) {
       setTitle(editTable.title || '');
-      setColumns(editTable.columns || ['']);
+      // Support format lama (array string) dan baru (array objek)
+      const cols = (editTable.columns || []).map((col) => {
+        if (typeof col === 'string') {
+          return { name: col, type: 'text' };
+        }
+        return { name: col.name || '', type: col.type || 'text' };
+      });
+      setColumns(cols.length > 0 ? cols : [{ name: '', type: 'text' }]);
     } else {
       setTitle('');
-      setColumns(['']);
+      setColumns([{ name: '', type: 'text' }]);
     }
     setError('');
   }, [editTable, isOpen]);
@@ -50,31 +66,37 @@ export default function TableFormModal({ isOpen, onClose, onSave, editTable }) {
 
   // Tambah kolom baru
   const addColumn = () => {
-    setColumns([...columns, '']);
+    setColumns([...columns, { name: '', type: 'text' }]);
   };
 
   // Hapus kolom
   const removeColumn = (index) => {
-    if (columns.length <= 1) return; // Minimal 1 kolom
+    if (columns.length <= 1) return;
     setColumns(columns.filter((_, i) => i !== index));
   };
 
   // Ubah nama kolom
-  const updateColumn = (index, value) => {
+  const updateColumnName = (index, value) => {
     const newCols = [...columns];
-    newCols[index] = value;
+    newCols[index] = { ...newCols[index], name: value };
+    setColumns(newCols);
+  };
+
+  // Ubah tipe kolom
+  const updateColumnType = (index, value) => {
+    const newCols = [...columns];
+    newCols[index] = { ...newCols[index], type: value };
     setColumns(newCols);
   };
 
   // Handle simpan
   const handleSave = async () => {
-    // Validasi
     if (!title.trim()) {
       setError('Judul tabel wajib diisi.');
       return;
     }
 
-    const validColumns = columns.filter((c) => c.trim() !== '');
+    const validColumns = columns.filter((c) => c.name.trim() !== '');
     if (validColumns.length === 0) {
       setError('Minimal 1 kolom wajib diisi.');
       return;
@@ -115,7 +137,7 @@ export default function TableFormModal({ isOpen, onClose, onSave, editTable }) {
           <p className="table-modal__subtitle">
             {editTable
               ? 'Ubah judul atau kolom tabel Anda.'
-              : 'Tentukan judul tabel dan judul-judul kolom yang Anda inginkan.'}
+              : 'Tentukan judul tabel, judul kolom, dan tipe datanya.'}
           </p>
         </div>
 
@@ -139,7 +161,7 @@ export default function TableFormModal({ isOpen, onClose, onSave, editTable }) {
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Contoh: Data Pengunjung Agustus 2026"
+              placeholder="Contoh: Data Pengunjung September 2026"
               className="table-modal__input"
               disabled={loading}
             />
@@ -149,7 +171,7 @@ export default function TableFormModal({ isOpen, onClose, onSave, editTable }) {
           <div className="table-modal__group">
             <div className="table-modal__columns-label">
               <label className="table-modal__label" style={{ marginBottom: 0 }}>
-                Judul Kolom
+                Kolom Data
               </label>
               <button
                 className="table-modal__add-col"
@@ -167,12 +189,22 @@ export default function TableFormModal({ isOpen, onClose, onSave, editTable }) {
                 <div key={i} className="table-modal__column-item">
                   <input
                     type="text"
-                    value={col}
-                    onChange={(e) => updateColumn(i, e.target.value)}
-                    placeholder={`Kolom ${i + 1} (contoh: Tanggal, Jumlah, dll)`}
+                    value={col.name}
+                    onChange={(e) => updateColumnName(i, e.target.value)}
+                    placeholder={`Nama kolom ${i + 1}`}
                     className="table-modal__column-input"
                     disabled={loading}
                   />
+                  <select
+                    value={col.type}
+                    onChange={(e) => updateColumnType(i, e.target.value)}
+                    className="table-modal__column-type"
+                    disabled={loading}
+                  >
+                    {COLUMN_TYPES.map((t) => (
+                      <option key={t.value} value={t.value}>{t.label}</option>
+                    ))}
+                  </select>
                   {columns.length > 1 && (
                     <button
                       className="table-modal__column-remove"

@@ -160,6 +160,27 @@
   box-shadow: 0 0 0 3px rgba(26, 107, 60, 0.1);
 }
 
+/* Dropdown tipe kolom */
+.table-modal__column-type {
+  width: 130px;
+  padding: 0.625rem 0.5rem;
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-xs);
+  font-family: var(--font-body);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.table-modal__column-type:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(26, 107, 60, 0.1);
+}
+
 .table-modal__column-remove {
   display: flex;
   align-items: center;

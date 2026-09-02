@@ -138,7 +138,35 @@
 .data-table__tr {
   transition: background var(--transition-fast);
 }
+/* Kolom Nomor */
+.data-table__th--number,
+.data-table__td--number {
+  width: 50px;
+  text-align: center;
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+  color: var(--color-text-muted);
+}
 
+.data-table__th--number {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Baris Total */
+.data-table__tr--total {
+  background: var(--color-primary-bg) !important;
+  border-top: 2px solid var(--color-primary-subtle);
+}
+
+.data-table__td--total-label {
+  text-align: right;
+  color: var(--color-primary-dark);
+}
+
+.data-table__td--total {
+  color: var(--color-primary-dark);
+  font-size: 1.05rem;
+}
 /* Zebra striping */
 .data-table__tr:nth-child(even) {
   background: var(--color-primary-bg);

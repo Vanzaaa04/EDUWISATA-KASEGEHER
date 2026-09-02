@@ -6,12 +6,15 @@ import './RowFormModal.css';
 
 /**
  * RowFormModal — Modal untuk menambah atau mengedit baris data.
- * Form otomatis menyesuaikan jumlah kolom tabel.
+ * Form otomatis menyesuaikan tipe kolom:
+ * - 'date': menampilkan date picker (kalender)
+ * - 'number': menampilkan input angka
+ * - 'text': menampilkan input teks biasa
  * Props:
  * - isOpen: boolean
  * - onClose: fungsi untuk menutup modal
  * - onSave: fungsi(values) untuk menyimpan
- * - columns: array judul kolom tabel
+ * - columns: array kolom tabel [{name, type}] atau string[]
  * - editRow: objek baris yang sedang diedit (null jika buat baru)
  * - tableName: nama tabel (untuk judul modal)
  */
@@ -20,16 +23,22 @@ export default function RowFormModal({ isOpen, onClose, onSave, columns, editRow
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  // Normalisasi kolom (support format lama string[] dan baru object[])
+  const normalizedColumns = (columns || []).map((col) => {
+    if (typeof col === 'string') {
+      return { name: col, type: 'text' };
+    }
+    return { name: col.name || '', type: col.type || 'text' };
+  });
+
   // Isi form saat buka modal
   useEffect(() => {
-    if (columns) {
+    if (normalizedColumns.length > 0) {
       if (editRow) {
-        // Edit: isi dengan data yang ada, padding jika kolom bertambah
         const currentValues = editRow.values || [];
-        setValues(columns.map((_, i) => currentValues[i] || ''));
+        setValues(normalizedColumns.map((_, i) => currentValues[i] || ''));
       } else {
-        // Baru: kosongkan semua
-        setValues(columns.map(() => ''));
+        setValues(normalizedColumns.map(() => ''));
       }
     }
     setError('');
@@ -61,8 +70,7 @@ export default function RowFormModal({ isOpen, onClose, onSave, columns, editRow
 
   // Handle simpan
   const handleSave = async () => {
-    // Validasi: minimal 1 kolom harus terisi
-    const hasValue = values.some((v) => v.trim() !== '');
+    const hasValue = values.some((v) => v.toString().trim() !== '');
     if (!hasValue) {
       setError('Minimal 1 kolom data wajib diisi.');
       return;
@@ -78,6 +86,53 @@ export default function RowFormModal({ isOpen, onClose, onSave, columns, editRow
       setError(err.message || 'Gagal menyimpan data.');
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Render input berdasarkan tipe kolom
+  const renderInput = (col, index) => {
+    const commonProps = {
+      id: `row-col-${index}`,
+      value: values[index] || '',
+      onChange: (e) => updateValue(index, e.target.value),
+      className: 'row-modal__input',
+      disabled: loading,
+    };
+
+    switch (col.type) {
+      case 'date':
+        return (
+          <input
+            {...commonProps}
+            type="date"
+          />
+        );
+      case 'number':
+        return (
+          <input
+            {...commonProps}
+            type="number"
+            placeholder="Masukkan angka..."
+            min="0"
+          />
+        );
+      default:
+        return (
+          <input
+            {...commonProps}
+            type="text"
+            placeholder={`Isi ${col.name}...`}
+          />
+        );
+    }
+  };
+
+  // Format label tipe kolom
+  const getTypeIcon = (type) => {
+    switch (type) {
+      case 'date': return '📅';
+      case 'number': return '🔢';
+      default: return '✏️';
     }
   };
 
@@ -116,20 +171,12 @@ export default function RowFormModal({ isOpen, onClose, onSave, columns, editRow
           )}
 
           {/* Form input untuk setiap kolom */}
-          {(columns || []).map((col, i) => (
+          {normalizedColumns.map((col, i) => (
             <div key={i} className="row-modal__group">
               <label className="row-modal__label" htmlFor={`row-col-${i}`}>
-                {col}
+                {getTypeIcon(col.type)} {col.name}
               </label>
-              <input
-                id={`row-col-${i}`}
-                type="text"
-                value={values[i] || ''}
-                onChange={(e) => updateValue(i, e.target.value)}
-                placeholder={`Isi ${col}...`}
-                className="row-modal__input"
-                disabled={loading}
-              />
+              {renderInput(col, i)}
             </div>
           ))}
         </div>
