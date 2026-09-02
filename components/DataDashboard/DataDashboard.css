@@ -1,0 +1,150 @@
+/* ============================================
+   KOMPONEN DATA DASHBOARD — Styling
+   Dashboard utama untuk menampilkan tabel-tabel data
+   ============================================ */
+
+/* Wrapper dashboard */
+.data-dashboard {
+  min-height: 300px;
+}
+
+/* Toolbar admin — tombol buat tabel + info login */
+.data-dashboard__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md);
+  background: linear-gradient(135deg, var(--color-primary-bg), var(--color-telang-bg));
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-primary-subtle);
+}
+
+.data-dashboard__toolbar-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: var(--fs-small);
+  color: var(--color-primary-dark);
+  font-weight: 500;
+}
+
+.data-dashboard__toolbar-info-icon {
+  color: var(--color-primary);
+}
+
+.data-dashboard__toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.data-dashboard__logout-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  background: rgba(220, 53, 69, 0.08);
+  color: #dc3545;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  font-family: var(--font-heading);
+  cursor: pointer;
+  border: none;
+  transition: all var(--transition-fast);
+}
+
+.data-dashboard__logout-btn:hover {
+  background: #dc3545;
+  color: var(--color-white);
+}
+
+/* State: Loading (skeleton) */
+.data-dashboard__loading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.data-dashboard__skeleton {
+  background: linear-gradient(90deg, var(--color-border-light) 25%, var(--color-bg) 50%, var(--color-border-light) 75%);
+  background-size: 200% 100%;
+  animation: dashboardShimmer 1.5s infinite;
+  border-radius: var(--radius-lg);
+  height: 200px;
+}
+
+@keyframes dashboardShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* State: Kosong (belum ada tabel) */
+.data-dashboard__empty {
+  text-align: center;
+  padding: var(--space-3xl) var(--space-md);
+}
+
+.data-dashboard__empty-icon {
+  color: var(--color-border);
+  margin-bottom: var(--space-md);
+}
+
+.data-dashboard__empty-title {
+  font-size: var(--fs-h3);
+  color: var(--color-text);
+  margin-bottom: var(--space-xs);
+}
+
+.data-dashboard__empty-desc {
+  font-size: var(--fs-body);
+  color: var(--color-text-muted);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Daftar tabel */
+.data-dashboard__tables {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* Login hint untuk pengunjung */
+.data-dashboard__login-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-telang-bg);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-lg);
+  font-size: var(--fs-small);
+  color: var(--color-telang);
+}
+
+.data-dashboard__login-hint a {
+  color: var(--color-telang);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.data-dashboard__login-hint a:hover {
+  color: var(--color-primary);
+}
+
+/* === RESPONSIF === */
+@media (max-width: 600px) {
+  .data-dashboard__toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .data-dashboard__toolbar-actions {
+    justify-content: center;
+  }
+}

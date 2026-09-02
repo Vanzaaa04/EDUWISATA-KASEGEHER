@@ -1,0 +1,60 @@
+/* ============================================
+   HALAMAN DATA PENGUNJUNG — Styling
+   ============================================ */
+
+/* Hero banner */
+.data-hero {
+  position: relative;
+  padding: calc(var(--nav-height) + var(--space-2xl)) 0 var(--space-xl);
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 60%, var(--color-telang) 100%);
+  overflow: hidden;
+}
+
+/* Pattern overlay dekoratif */
+.data-hero__bg {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 15% 85%, rgba(212, 168, 67, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 85% 15%, rgba(74, 111, 165, 0.15) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+/* Konten hero */
+.data-hero__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.data-hero__title {
+  font-size: var(--fs-h1);
+  color: var(--color-white);
+  margin-bottom: var(--space-sm);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.data-hero__subtitle {
+  font-size: var(--fs-body);
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* Section konten utama */
+.data-content {
+  padding: var(--space-2xl) 0 var(--space-3xl);
+  background: var(--color-bg);
+}
+
+/* === RESPONSIF === */
+@media (min-width: 768px) {
+  .data-hero {
+    padding: calc(var(--nav-height) + var(--space-3xl)) 0 var(--space-2xl);
+  }
+
+  .data-hero__subtitle {
+    font-size: 1.1rem;
+  }
+}

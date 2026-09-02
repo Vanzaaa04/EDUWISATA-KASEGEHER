@@ -25,6 +25,7 @@ const menuItems = [
   { label: 'Produk Kami', href: '/produk' },
   { label: 'Pesan Tiket', href: '/tiket' },
   { label: 'Rute', href: '/rute' },
+  { label: 'Data Pengunjung', href: '/data-pengunjung' },
   { label: 'Kontak', href: '/kontak' },
 ];
 
