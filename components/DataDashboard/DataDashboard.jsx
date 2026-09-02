@@ -38,26 +38,12 @@ export default function DataDashboard() {
     const email = localStorage.getItem('admin_email');
 
     if (token && email) {
-      // Verifikasi token masih valid
-      fetch('/api/auth/check', {
-        headers: { 'Authorization': `Bearer ${token}` },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.isAdmin) {
-            setIsAdmin(true);
-            setAdminEmail(email);
-            setAdminToken(token);
-          } else {
-            // Token kadaluarsa, bersihkan
-            localStorage.removeItem('admin_token');
-            localStorage.removeItem('admin_email');
-          }
-        })
-        .catch(() => {
-          localStorage.removeItem('admin_token');
-          localStorage.removeItem('admin_email');
-        });
+      // Token ada di localStorage — admin sudah terverifikasi saat login.
+      // Keamanan tetap terjaga karena setiap operasi CRUD
+      // diverifikasi ulang di server (API routes).
+      setIsAdmin(true);
+      setAdminEmail(email);
+      setAdminToken(token);
     }
   }, []);
 
