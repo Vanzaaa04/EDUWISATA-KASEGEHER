@@ -60,7 +60,7 @@ export async function GET() {
     sheet.addRow([]);
 
     // === HEADER KOLOM ===
-    const headerRow = sheet.addRow(['No', 'Nama', 'Asal', 'Rating', 'Tanggal Kunjungan', 'Komentar']);
+    const headerRow = sheet.addRow(['No', 'Nama', 'Rating', 'Tanggal Kunjungan', 'Komentar']);
     headerRow.eachCell((cell) => {
       cell.font = { name: 'Calibri', size: 11, bold: true, color: { argb: 'FFFFFFFF' } };
       cell.fill = {
@@ -97,7 +97,6 @@ export async function GET() {
       const row = sheet.addRow([
         index + 1,
         fb.nama,
-        fb.asal || '-',
         ratingStr,
         tanggalStr,
         fb.komentar,
@@ -125,7 +124,7 @@ export async function GET() {
       // Nomor rata tengah
       row.getCell(1).alignment = { horizontal: 'center', vertical: 'middle' };
       // Rating rata tengah
-      row.getCell(4).alignment = { horizontal: 'center', vertical: 'middle' };
+      row.getCell(3).alignment = { horizontal: 'center', vertical: 'middle' };
     });
 
     // === RINGKASAN ===
@@ -135,7 +134,7 @@ export async function GET() {
       ? (feedback.reduce((sum, f) => sum + (f.rating || 0), 0) / totalFeedback).toFixed(1)
       : 0;
 
-    const summaryRow = sheet.addRow(['', `Total Feedback: ${totalFeedback}`, '', `Rata-rata Rating: ${avgRating}/5`, '', '']);
+    const summaryRow = sheet.addRow(['', `Total Feedback: ${totalFeedback}`, `Rata-rata Rating: ${avgRating}/5`, '', '']);
     summaryRow.eachCell((cell) => {
       cell.font = { name: 'Calibri', size: 11, bold: true, color: { argb: 'FF0D4A28' } };
     });
@@ -143,10 +142,9 @@ export async function GET() {
     // === ATUR LEBAR KOLOM ===
     sheet.getColumn(1).width = 6;   // No
     sheet.getColumn(2).width = 25;  // Nama
-    sheet.getColumn(3).width = 20;  // Asal
-    sheet.getColumn(4).width = 18;  // Rating
-    sheet.getColumn(5).width = 25;  // Tanggal Kunjungan
-    sheet.getColumn(6).width = 50;  // Komentar
+    sheet.getColumn(3).width = 18;  // Rating
+    sheet.getColumn(4).width = 25;  // Tanggal Kunjungan
+    sheet.getColumn(5).width = 50;  // Komentar
 
     // Generate file Excel ke buffer
     const buffer = await workbook.xlsx.writeBuffer();

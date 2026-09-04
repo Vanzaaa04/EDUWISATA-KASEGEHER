@@ -11,7 +11,7 @@ import getSupabase from '@/lib/supabase';
 
 export async function POST(request) {
   try {
-    const { nama, asal, rating, komentar, tanggal_kunjungan } = await request.json();
+    const { nama, rating, komentar, tanggal_kunjungan } = await request.json();
 
     // Validasi input
     if (!nama || !nama.trim()) {
@@ -32,7 +32,6 @@ export async function POST(request) {
       .insert([
         {
           nama: nama.trim(),
-          asal: asal?.trim() || null,
           rating: parseInt(rating),
           komentar: komentar.trim(),
           tanggal_kunjungan: tanggal_kunjungan || null,
@@ -50,7 +49,7 @@ export async function POST(request) {
     }
 
     // Kirim notifikasi ke Telegram (non-blocking)
-    sendTelegramNotification({ nama: nama.trim(), asal: asal?.trim(), rating, komentar: komentar.trim(), tanggal_kunjungan });
+    sendTelegramNotification({ nama: nama.trim(), rating, komentar: komentar.trim(), tanggal_kunjungan });
 
     return NextResponse.json({
       message: 'Feedback berhasil dikirim! Terima kasih atas masukan Anda.',
@@ -106,7 +105,7 @@ export async function GET(request) {
 /**
  * Kirim notifikasi ke Telegram (non-blocking, tidak menggagalkan response).
  */
-async function sendTelegramNotification({ nama, asal, rating, komentar, tanggal_kunjungan }) {
+async function sendTelegramNotification({ nama, rating, komentar, tanggal_kunjungan }) {
   try {
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
@@ -136,7 +135,6 @@ async function sendTelegramNotification({ nama, asal, rating, komentar, tanggal_
 
     const message = `⭐ *FEEDBACK PENGUNJUNG BARU*\n\n`
       + `👤 *Nama:* ${nama}\n`
-      + (asal ? `📍 *Asal:* ${asal}\n` : '')
       + `⭐ *Rating:* ${stars} (${rating}/5)\n`
       + `📅 *Tanggal Kunjungan:* ${tanggalStr}\n`
       + `💬 *Komentar:*\n${komentar}\n`

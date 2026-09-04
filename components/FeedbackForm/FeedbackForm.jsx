@@ -161,7 +161,7 @@ export default function FeedbackForm() {
           </span>
         </div>
 
-        {/* Row: Nama & Asal */}
+        {/* Row: Nama & Tanggal Kunjungan */}
         <div className="feedback-form__row">
           <div className="feedback-form__group">
             <label htmlFor="fb-nama" className="feedback-form__label">
@@ -181,38 +181,20 @@ export default function FeedbackForm() {
             />
           </div>
           <div className="feedback-form__group">
-            <label htmlFor="fb-asal" className="feedback-form__label">
-              <MapPin size={18} weight="duotone" />
-              Asal Daerah (Opsional)
+            <label htmlFor="fb-tanggal" className="feedback-form__label">
+              <CalendarBlank size={18} weight="duotone" />
+              Tanggal Kunjungan (Opsional)
             </label>
             <input
-              id="fb-asal"
-              type="text"
-              name="asal"
-              value={formData.asal}
+              id="fb-tanggal"
+              type="date"
+              name="tanggal_kunjungan"
+              value={formData.tanggal_kunjungan}
               onChange={handleChange}
-              placeholder="Contoh: Surabaya"
               className="feedback-form__input"
               disabled={status === 'loading'}
             />
           </div>
-        </div>
-
-        {/* Tanggal Kunjungan */}
-        <div className="feedback-form__group">
-          <label htmlFor="fb-tanggal" className="feedback-form__label">
-            <CalendarBlank size={18} weight="duotone" />
-            Tanggal Kunjungan (Opsional)
-          </label>
-          <input
-            id="fb-tanggal"
-            type="date"
-            name="tanggal_kunjungan"
-            value={formData.tanggal_kunjungan}
-            onChange={handleChange}
-            className="feedback-form__input"
-            disabled={status === 'loading'}
-          />
         </div>
 
         {/* Komentar */}

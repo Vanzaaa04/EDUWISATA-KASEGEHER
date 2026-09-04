@@ -144,7 +144,6 @@ export default function FeedbackDashboard() {
               <tr>
                 <th style={{ width: '50px', textAlign: 'center' }}>No</th>
                 <th>Pengunjung</th>
-                <th>Asal</th>
                 <th style={{ textAlign: 'center' }}>Rating</th>
                 <th>Tgl Kunjungan</th>
                 <th>Komentar</th>
@@ -158,7 +157,6 @@ export default function FeedbackDashboard() {
                     <strong>{fb.nama}</strong>
                     <span className="fb-table__date">Diisi: {formatDateTime(fb.created_at)}</span>
                   </td>
-                  <td>{fb.asal || '-'}</td>
                   <td style={{ textAlign: 'center' }}>
                     <div className="fb-table__rating" title={`Rating: ${fb.rating}/5`}>
                       {'⭐'.repeat(fb.rating)}
