@@ -36,29 +36,14 @@ export async function GET() {
     const sheet = workbook.addWorksheet('Feedback Pengunjung');
 
     // === HEADER JUDUL ===
-    sheet.mergeCells('A1:F1');
+    sheet.mergeCells('A1:E1');
     const titleCell = sheet.getCell('A1');
-    titleCell.value = 'REKAP FEEDBACK PENGUNJUNG — EDUWISATA HERBAL DESA SUKOLELO';
+    titleCell.value = 'REKAP FEEDBACK PENGUNJUNG EDUWISATA HERBAL DESA SUKOLELO';
     titleCell.font = { name: 'Calibri', size: 14, bold: true, color: { argb: 'FF0D4A28' } };
     titleCell.alignment = { horizontal: 'center', vertical: 'middle' };
     sheet.getRow(1).height = 35;
 
-    // Tanggal export
-    sheet.mergeCells('A2:F2');
-    const dateCell = sheet.getCell('A2');
-    dateCell.value = `Diekspor pada: ${new Date().toLocaleDateString('id-ID', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    })}`;
-    dateCell.font = { name: 'Calibri', size: 10, italic: true, color: { argb: 'FF666666' } };
-    dateCell.alignment = { horizontal: 'center' };
-    sheet.getRow(2).height = 22;
-
-    // Baris kosong
+    // Baris kosong (dulu baris tanggal export, sekarang dihapus saja / diganti baris kosong)
     sheet.addRow([]);
 
     // === HEADER KOLOM ===
