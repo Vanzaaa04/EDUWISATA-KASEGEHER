@@ -7,6 +7,7 @@ import {
   DownloadSimple,
   SpinnerGap,
   Warning,
+  Trash,
 } from '@phosphor-icons/react';
 import './FeedbackDashboard.css';
 
@@ -19,6 +20,7 @@ export default function FeedbackDashboard() {
   const [stats, setStats] = useState({ total: 0, averageRating: 0 });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [deletingId, setDeletingId] = useState(null);
 
   // Fetch data feedback
   useEffect(() => {
@@ -43,6 +45,29 @@ export default function FeedbackDashboard() {
       setError('Terjadi kesalahan jaringan.');
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Handler Hapus Feedback
+  const handleDelete = async (id) => {
+    if (!window.confirm('Yakin ingin menghapus feedback ini? Data tidak bisa dikembalikan.')) {
+      return;
+    }
+    
+    setDeletingId(id);
+    try {
+      const res = await fetch(`/api/feedback/${id}`, { method: 'DELETE' });
+      const data = await res.json();
+      if (data.success) {
+        // Refresh data setelah berhasil
+        fetchFeedback();
+      } else {
+        alert(data.message || 'Gagal menghapus feedback');
+      }
+    } catch (err) {
+      alert('Terjadi kesalahan jaringan.');
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -147,6 +172,7 @@ export default function FeedbackDashboard() {
                 <th style={{ textAlign: 'center' }}>Rating</th>
                 <th>Tgl Kunjungan</th>
                 <th>Komentar</th>
+                <th style={{ width: '80px', textAlign: 'center' }}>Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -167,6 +193,20 @@ export default function FeedbackDashboard() {
                   <td>{formatDate(fb.tanggal_kunjungan)}</td>
                   <td>
                     <div className="fb-table__comment">{fb.komentar}</div>
+                  </td>
+                  <td style={{ textAlign: 'center' }}>
+                    <button
+                      className="fb-table__delete-btn"
+                      onClick={() => handleDelete(fb.id)}
+                      disabled={deletingId === fb.id}
+                      title="Hapus Feedback"
+                    >
+                      {deletingId === fb.id ? (
+                        <SpinnerGap size={18} className="fb-loading__spinner" />
+                      ) : (
+                        <Trash size={18} weight="bold" />
+                      )}
+                    </button>
                   </td>
                 </tr>
               ))}
