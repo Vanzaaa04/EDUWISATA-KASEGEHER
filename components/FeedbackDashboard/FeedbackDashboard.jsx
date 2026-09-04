@@ -155,7 +155,9 @@ export default function FeedbackDashboard() {
                   <td style={{ textAlign: 'center' }}>{index + 1}</td>
                   <td>
                     <strong>{fb.nama}</strong>
-                    <span className="fb-table__date">Diisi: {formatDateTime(fb.created_at)}</span>
+                    {fb.tanggal_kunjungan && (
+                      <span className="fb-table__date">Diisi: {formatDate(fb.tanggal_kunjungan)}</span>
+                    )}
                   </td>
                   <td style={{ textAlign: 'center' }}>
                     <div className="fb-table__rating" title={`Rating: ${fb.rating}/5`}>
