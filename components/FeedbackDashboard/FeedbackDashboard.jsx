@@ -95,7 +95,7 @@ export default function FeedbackDashboard() {
   }
 
   return (
-    <div className="feedback-dashboard" data-aos="fade-up">
+    <div className="feedback-dashboard">
       {/* Stats Header */}
       <div className="fb-stats">
         <div className="fb-stat-card">
