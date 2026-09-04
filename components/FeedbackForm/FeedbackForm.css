@@ -1,0 +1,221 @@
+/* ============================================
+   KOMPONEN FEEDBACK FORM — Styling
+   Form rating bintang + feedback pengunjung
+   ============================================ */
+
+/* Card utama */
+.feedback-form-card {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  border: 1px solid var(--color-primary-subtle);
+}
+
+/* Header card */
+.feedback-form-card__header {
+  padding: var(--space-lg);
+  background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+  text-align: center;
+}
+
+.feedback-form-card__title {
+  font-family: var(--font-heading);
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 4px;
+}
+
+.feedback-form-card__subtitle {
+  font-size: var(--fs-small);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Body form */
+.feedback-form {
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* === RATING BINTANG === */
+.feedback-rating {
+  text-align: center;
+  padding: var(--space-sm) 0;
+}
+
+.feedback-rating__label {
+  display: block;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--space-xs);
+}
+
+.feedback-rating__stars {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.feedback-rating__star {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+  transition: transform 150ms ease;
+  line-height: 1;
+}
+
+.feedback-rating__star:hover {
+  transform: scale(1.25);
+}
+
+.feedback-rating__star svg {
+  transition: all 150ms ease;
+}
+
+.feedback-rating__star--active svg {
+  filter: drop-shadow(0 0 6px rgba(212, 168, 67, 0.5));
+}
+
+.feedback-rating__text {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  margin-top: 6px;
+}
+
+/* === FORM GROUP === */
+.feedback-form__group {
+  display: flex;
+  flex-direction: column;
+}
+
+.feedback-form__label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 6px;
+}
+
+.feedback-form__input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--color-bg);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-body);
+  font-family: var(--font-body);
+  color: var(--color-text);
+  transition: all var(--transition-fast);
+}
+
+.feedback-form__input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(26, 107, 60, 0.1);
+}
+
+.feedback-form__input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.feedback-form__textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* 2 kolom (nama + asal) */
+.feedback-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+}
+
+/* Error */
+.feedback-form__error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 0.625rem 0.875rem;
+  background: rgba(220, 53, 69, 0.08);
+  border-radius: var(--radius-sm);
+  color: #dc3545;
+  font-size: var(--fs-small);
+  font-weight: 500;
+}
+
+/* Submit */
+.feedback-form__submit {
+  text-align: center;
+  padding-top: var(--space-xs);
+}
+
+.feedback-form__btn {
+  width: 100%;
+}
+
+.feedback-form__spinner {
+  animation: fbSpinner 0.8s linear infinite;
+}
+
+@keyframes fbSpinner {
+  to { transform: rotate(360deg); }
+}
+
+/* === SUCCESS STATE === */
+.feedback-success {
+  text-align: center;
+  padding: var(--space-2xl) var(--space-lg);
+}
+
+.feedback-success__icon {
+  color: var(--color-primary);
+  margin-bottom: var(--space-sm);
+  animation: fbSuccessPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes fbSuccessPop {
+  0% { transform: scale(0); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.feedback-success__title {
+  font-size: var(--fs-h3);
+  color: var(--color-text);
+  margin-bottom: var(--space-xs);
+}
+
+.feedback-success__desc {
+  font-size: var(--fs-body);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.feedback-success__rating {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-md);
+}
+
+/* === RESPONSIF === */
+@media (max-width: 600px) {
+  .feedback-form__row {
+    grid-template-columns: 1fr;
+  }
+
+  .feedback-form-card__header {
+    padding: var(--space-md);
+  }
+
+  .feedback-form {
+    padding: var(--space-md);
+  }
+}

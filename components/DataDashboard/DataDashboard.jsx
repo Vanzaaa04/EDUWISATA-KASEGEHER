@@ -6,6 +6,7 @@ import { ShieldCheck, SignOut, Plus, ChartBar, Info } from '@phosphor-icons/reac
 import DataTable from '@/components/DataTable/DataTable';
 import TableFormModal from '@/components/TableFormModal/TableFormModal';
 import RowFormModal from '@/components/RowFormModal/RowFormModal';
+import FeedbackDashboard from '@/components/FeedbackDashboard/FeedbackDashboard';
 import './DataDashboard.css';
 
 /**
@@ -31,6 +32,9 @@ export default function DataDashboard() {
   const [showRowModal, setShowRowModal] = useState(false);
   const [editingRow, setEditingRow] = useState(null);
   const [activeTable, setActiveTable] = useState(null); // tabel yang sedang ditambah/edit barisnya
+
+  // State Tabs
+  const [activeTab, setActiveTab] = useState('data'); // 'data' atau 'feedback'
 
   // Cek status admin saat pertama kali load
   useEffect(() => {
@@ -261,14 +265,37 @@ export default function DataDashboard() {
         </div>
       )}
 
-      {/* Daftar tabel */}
-      {tables.length > 0 ? (
-        <div className="data-dashboard__tables">
-          {tables.map((table) => (
-            <DataTable
-              key={table.id}
-              table={table}
-              isAdmin={isAdmin}
+      {/* Tabs (hanya tampil jika sudah login) */}
+      {isAdmin && (
+        <div className="data-dashboard__tabs" data-aos="fade-up">
+          <button
+            className={`data-dashboard__tab ${activeTab === 'data' ? 'data-dashboard__tab--active' : ''}`}
+            onClick={() => setActiveTab('data')}
+          >
+            Tabel Data
+          </button>
+          <button
+            className={`data-dashboard__tab ${activeTab === 'feedback' ? 'data-dashboard__tab--active' : ''}`}
+            onClick={() => setActiveTab('feedback')}
+          >
+            Feedback Pengunjung
+          </button>
+        </div>
+      )}
+
+      {/* Konten Utama */}
+      {activeTab === 'feedback' && isAdmin ? (
+        <FeedbackDashboard />
+      ) : (
+        <>
+          {/* Daftar tabel */}
+          {tables.length > 0 ? (
+            <div className="data-dashboard__tables">
+              {tables.map((table) => (
+                <DataTable
+                  key={table.id}
+                  table={table}
+                  isAdmin={isAdmin}
               onEditTable={(t) => {
                 setEditingTable(t);
                 setShowTableModal(true);
@@ -324,6 +351,8 @@ export default function DataDashboard() {
         editRow={editingRow}
         tableName={activeTable?.title || ''}
       />
+      </>
+      )}
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import ContactForm from '@/components/ContactForm/ContactForm';
+import FeedbackForm from '@/components/FeedbackForm/FeedbackForm';
 import { MapPin, EnvelopeSimple, WhatsappLogo } from '@phosphor-icons/react/dist/ssr';
 import './kontak.css';
 
@@ -78,6 +79,13 @@ export default function KontakPage() {
               <ContactForm />
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Section Feedback */}
+      <section className="feedback-section section-padding" style={{ backgroundColor: 'var(--color-primary-bg)' }}>
+        <div className="container" style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <FeedbackForm />
         </div>
       </section>
     </>
