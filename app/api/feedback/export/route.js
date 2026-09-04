@@ -80,7 +80,7 @@ export async function GET() {
     // === ISI DATA ===
     (feedback || []).forEach((fb, index) => {
       // Format tanggal kunjungan
-      let tanggalStr = '-';
+      let tanggalStr = '';
       if (fb.tanggal_kunjungan) {
         try {
           tanggalStr = new Date(fb.tanggal_kunjungan).toLocaleDateString('id-ID', {

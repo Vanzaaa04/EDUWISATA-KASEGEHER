@@ -48,7 +48,7 @@ export default function FeedbackDashboard() {
 
   // Helper format tanggal (Indonesia)
   const formatDate = (dateStr) => {
-    if (!dateStr) return '-';
+    if (!dateStr) return '';
     try {
       return new Date(dateStr).toLocaleDateString('id-ID', {
         year: 'numeric',
