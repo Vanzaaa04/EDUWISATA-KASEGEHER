@@ -151,7 +151,7 @@ export default function FeedbackDashboard() {
         
         {/* Tombol Export yang langsung download dari API */}
         <a 
-          href="/api/feedback/export" 
+          href={`/api/feedback/export?t=${Date.now()}`} 
           target="_blank"
           rel="noopener noreferrer"
           className="fb-toolbar__btn"
