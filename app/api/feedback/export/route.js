@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import getSupabase from '@/lib/supabase';
 import ExcelJS from 'exceljs';
 
+export const dynamic = 'force-dynamic';
+
 /**
  * API Route: /api/feedback/export
  * GET — Menghasilkan file Excel (.xlsx) berisi semua data feedback.
