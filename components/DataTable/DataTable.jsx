@@ -19,7 +19,7 @@ import './DataTable.css';
 
 // Helper: format tanggal menjadi tampilan Indonesia
 function formatDate(dateStr) {
-  if (!dateStr) return '-';
+  if (!dateStr) return '';
   try {
     const date = new Date(dateStr);
     return date.toLocaleDateString('id-ID', {
@@ -35,7 +35,7 @@ function formatDate(dateStr) {
 
 // Helper: format angka dengan separator ribuan
 function formatNumber(numStr) {
-  if (!numStr && numStr !== 0) return '-';
+  if (!numStr && numStr !== 0) return '';
   const num = Number(numStr);
   if (isNaN(num)) return numStr;
   return num.toLocaleString('id-ID');
