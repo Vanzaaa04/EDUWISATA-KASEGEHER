@@ -316,6 +316,7 @@ export default function DataDashboard() {
                   key={table.id}
                   table={table}
                   isAdmin={isAdmin}
+                  adminToken={adminToken}
               onEditTable={(t) => {
                 setEditingTable(t);
                 setShowTableModal(true);

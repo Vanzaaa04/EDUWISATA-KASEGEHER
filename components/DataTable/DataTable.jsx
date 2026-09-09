@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Table, PencilSimple, Trash, Plus, Package } from '@phosphor-icons/react';
+import { Table, PencilSimple, Trash, Plus, Package, DownloadSimple } from '@phosphor-icons/react';
 import './DataTable.css';
 
 /**
@@ -15,6 +15,7 @@ import './DataTable.css';
  * - onAddRow: fungsi untuk membuka modal tambah baris
  * - onEditRow: fungsi untuk membuka modal edit baris
  * - onDeleteRow: fungsi untuk menghapus baris
+ * - adminToken: token admin untuk download Excel
  */
 
 // Helper: format tanggal menjadi tampilan Indonesia
@@ -72,6 +73,7 @@ export default function DataTable({
   onAddRow,
   onEditRow,
   onDeleteRow,
+  adminToken,
 }) {
   const [confirmDeleteTable, setConfirmDeleteTable] = useState(false);
   const [confirmDeleteRowId, setConfirmDeleteRowId] = useState(null);
@@ -102,6 +104,16 @@ export default function DataTable({
         {/* Tombol admin di header tabel */}
         {isAdmin && (
           <div className="data-table__admin-actions">
+            <a
+              href={`/api/data-tables/export?token=${adminToken}&tableId=${table.id}&t=${Date.now()}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="data-table__admin-btn data-table__admin-btn--download"
+              aria-label="Download Excel"
+            >
+              <DownloadSimple size={14} weight="bold" />
+              Excel
+            </a>
             <button
               className="data-table__admin-btn data-table__admin-btn--edit"
               onClick={() => onEditTable(table)}
