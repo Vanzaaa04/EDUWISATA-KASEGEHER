@@ -117,7 +117,7 @@ export async function GET(request) {
     // === HEADER JUDUL ===
     sheet.mergeCells(`A1:${lastCol}1`);
     const titleCell = sheet.getCell('A1');
-    titleCell.value = `REKAP ${(table.title || 'DATA').toUpperCase()} — EDUWISATA HERBAL DESA SUKOLELO`;
+    titleCell.value = `REKAP ${(table.title || 'DATA').toUpperCase()} EDUWISATA HERBAL DESA SUKOLELO`;
     titleCell.font = { name: 'Calibri', size: 14, bold: true, color: { argb: 'FF0D4A28' } };
     titleCell.alignment = { horizontal: 'center', vertical: 'middle' };
     sheet.getRow(1).height = 35;
