@@ -1,20 +1,25 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ShieldCheck, SignOut, Plus, ChartBar, Info } from '@phosphor-icons/react';
 import DataTable from '@/components/DataTable/DataTable';
 import TableFormModal from '@/components/TableFormModal/TableFormModal';
 import RowFormModal from '@/components/RowFormModal/RowFormModal';
 import FeedbackDashboard from '@/components/FeedbackDashboard/FeedbackDashboard';
+import VisitsDashboard from '@/components/VisitsDashboard/VisitsDashboard';
 import './DataDashboard.css';
 
 /**
  * DataDashboard — Komponen utama dashboard data pengunjung.
  * Mengambil data tabel dari API, menampilkan tabel-tabel,
  * dan menyediakan fitur CRUD untuk admin.
+ * Non-admin akan di-redirect ke halaman login.
  */
 export default function DataDashboard() {
+  const router = useRouter();
+
   // State data
   const [tables, setTables] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -33,8 +38,8 @@ export default function DataDashboard() {
   const [editingRow, setEditingRow] = useState(null);
   const [activeTable, setActiveTable] = useState(null); // tabel yang sedang ditambah/edit barisnya
 
-  // State Tabs
-  const [activeTab, setActiveTab] = useState('data'); // 'data' atau 'feedback'
+  // State Tabs: 'data', 'feedback', atau 'visits'
+  const [activeTab, setActiveTab] = useState('data');
 
   // Cek status admin saat pertama kali load
   useEffect(() => {
@@ -48,8 +53,11 @@ export default function DataDashboard() {
       setIsAdmin(true);
       setAdminEmail(email);
       setAdminToken(token);
+    } else {
+      // Bukan admin — redirect ke halaman login
+      router.replace('/login');
     }
-  }, []);
+  }, [router]);
 
   // Fetch semua tabel data
   const fetchTables = useCallback(async () => {
@@ -219,6 +227,7 @@ export default function DataDashboard() {
     setIsAdmin(false);
     setAdminEmail('');
     setAdminToken('');
+    router.replace('/');
   };
 
   // === RENDER ===
@@ -233,16 +242,21 @@ export default function DataDashboard() {
     );
   }
 
+  // Jika bukan admin, jangan render apapun (sedang redirect)
+  if (!isAdmin) {
+    return null;
+  }
+
   return (
     <div className="data-dashboard">
-      {/* Toolbar admin (hanya tampil jika sudah login) */}
-      {isAdmin && (
-        <div className="data-dashboard__toolbar" data-aos="fade-down">
-          <div className="data-dashboard__toolbar-info">
-            <ShieldCheck size={20} weight="duotone" className="data-dashboard__toolbar-info-icon" />
-            <span>Login sebagai <strong>{adminEmail}</strong></span>
-          </div>
-          <div className="data-dashboard__toolbar-actions">
+      {/* Toolbar admin */}
+      <div className="data-dashboard__toolbar" data-aos="fade-down">
+        <div className="data-dashboard__toolbar-info">
+          <ShieldCheck size={20} weight="duotone" className="data-dashboard__toolbar-info-icon" />
+          <span>Login sebagai <strong>{adminEmail}</strong></span>
+        </div>
+        <div className="data-dashboard__toolbar-actions">
+          {activeTab === 'data' && (
             <button
               className="btn-primary"
               onClick={() => {
@@ -254,38 +268,44 @@ export default function DataDashboard() {
               <Plus size={16} weight="bold" />
               Buat Tabel Baru
             </button>
-            <button
-              className="data-dashboard__logout-btn"
-              onClick={handleLogout}
-            >
-              <SignOut size={14} weight="bold" />
-              Logout
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Tabs (hanya tampil jika sudah login) */}
-      {isAdmin && (
-        <div className="data-dashboard__tabs" data-aos="fade-up">
+          )}
           <button
-            className={`data-dashboard__tab ${activeTab === 'data' ? 'data-dashboard__tab--active' : ''}`}
-            onClick={() => setActiveTab('data')}
+            className="data-dashboard__logout-btn"
+            onClick={handleLogout}
           >
-            Tabel Data
-          </button>
-          <button
-            className={`data-dashboard__tab ${activeTab === 'feedback' ? 'data-dashboard__tab--active' : ''}`}
-            onClick={() => setActiveTab('feedback')}
-          >
-            Feedback Pengunjung
+            <SignOut size={14} weight="bold" />
+            Logout
           </button>
         </div>
-      )}
+      </div>
 
-      {/* Konten Utama */}
-      {activeTab === 'feedback' && isAdmin ? (
+      {/* Tabs navigasi */}
+      <div className="data-dashboard__tabs" data-aos="fade-up">
+        <button
+          className={`data-dashboard__tab ${activeTab === 'data' ? 'data-dashboard__tab--active' : ''}`}
+          onClick={() => setActiveTab('data')}
+        >
+          Tabel Data
+        </button>
+        <button
+          className={`data-dashboard__tab ${activeTab === 'feedback' ? 'data-dashboard__tab--active' : ''}`}
+          onClick={() => setActiveTab('feedback')}
+        >
+          Feedback Pengunjung
+        </button>
+        <button
+          className={`data-dashboard__tab ${activeTab === 'visits' ? 'data-dashboard__tab--active' : ''}`}
+          onClick={() => setActiveTab('visits')}
+        >
+          Kunjungan Website
+        </button>
+      </div>
+
+      {/* Konten berdasarkan tab aktif */}
+      {activeTab === 'feedback' ? (
         <FeedbackDashboard />
+      ) : activeTab === 'visits' ? (
+        <VisitsDashboard adminToken={adminToken} />
       ) : (
         <>
           {/* Daftar tabel */}
@@ -320,9 +340,7 @@ export default function DataDashboard() {
           <ChartBar size={64} weight="duotone" className="data-dashboard__empty-icon" />
           <h3 className="data-dashboard__empty-title">Belum Ada Data</h3>
           <p className="data-dashboard__empty-desc">
-            {isAdmin
-              ? 'Klik tombol "Buat Tabel Baru" di atas untuk mulai menambahkan data pengunjung.'
-              : 'Data pengunjung belum tersedia. Silakan kunjungi halaman ini lagi nanti.'}
+            Klik tombol &quot;Buat Tabel Baru&quot; di atas untuk mulai menambahkan data pengunjung.
           </p>
         </div>
       )}
@@ -356,3 +374,4 @@ export default function DataDashboard() {
     </div>
   );
 }
+

@@ -4,20 +4,21 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { List, X } from '@phosphor-icons/react';
+import { List, X, ShieldCheck } from '@phosphor-icons/react';
 import './Navbar.css';
 
 /**
  * Navbar — Komponen navigasi utama website.
  * Fitur:
  * - Logo utama PPK Ormawa HIMATEKPA di kiri
- * - Menu navigasi 7 item
+ * - Menu navigasi 7 item (tanpa Data Pengunjung — khusus admin)
+ * - Icon admin kecil (ShieldCheck) di pojok kanan
  * - Transparan di atas, solid saat scroll
  * - Hamburger menu untuk mobile
  * - Active link berdasarkan pathname
  */
 
-// Data menu navigasi
+// Data menu navigasi — tanpa "Data Pengunjung" (hanya admin)
 const menuItems = [
   { label: 'Beranda', href: '/' },
   { label: 'Tentang Desa', href: '/tentang' },
@@ -25,18 +26,25 @@ const menuItems = [
   { label: 'Produk Kami', href: '/produk' },
   { label: 'Pesan Tiket', href: '/tiket' },
   { label: 'Rute', href: '/rute' },
-  { label: 'Data Pengunjung', href: '/data-pengunjung' },
   { label: 'Kontak', href: '/kontak' },
 ];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const pathname = usePathname();
 
   // Cek apakah halaman saat ini adalah Beranda (homepage)
   // Navbar transparan hanya di Beranda, solid di halaman lain
   const isHomePage = pathname === '/';
+
+  // Cek status admin dari localStorage
+  useEffect(() => {
+    const token = localStorage.getItem('admin_token');
+    const email = localStorage.getItem('admin_email');
+    setIsAdmin(!!(token && email));
+  }, [pathname]);
 
   // Deteksi scroll untuk mengubah tampilan Navbar
   useEffect(() => {
@@ -67,6 +75,9 @@ export default function Navbar() {
 
   // Navbar solid jika: (1) bukan homepage, atau (2) sudah scroll
   const isNavSolid = !isHomePage || isScrolled;
+
+  // Link admin: ke dashboard jika sudah login, ke login jika belum
+  const adminLink = isAdmin ? '/data-pengunjung' : '/login';
 
   return (
     <nav className={`navbar ${isNavSolid ? 'navbar--scrolled' : ''}`}>
@@ -100,15 +111,27 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Tombol hamburger — Mobile */}
-        <button
-          className="navbar__toggle"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label={isMobileMenuOpen ? 'Tutup menu' : 'Buka menu'}
-          aria-expanded={isMobileMenuOpen}
-        >
-          {isMobileMenuOpen ? <X size={28} weight="bold" /> : <List size={28} weight="bold" />}
-        </button>
+        {/* Icon admin kecil — tidak mencolok, di samping hamburger */}
+        <div className="navbar__actions">
+          <Link
+            href={adminLink}
+            className="navbar__admin-icon"
+            aria-label={isAdmin ? 'Dashboard Admin' : 'Login Admin'}
+            title={isAdmin ? 'Dashboard Admin' : 'Login Admin'}
+          >
+            <ShieldCheck size={20} weight={isAdmin ? 'fill' : 'regular'} />
+          </Link>
+
+          {/* Tombol hamburger — Mobile */}
+          <button
+            className="navbar__toggle"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label={isMobileMenuOpen ? 'Tutup menu' : 'Buka menu'}
+            aria-expanded={isMobileMenuOpen}
+          >
+            {isMobileMenuOpen ? <X size={28} weight="bold" /> : <List size={28} weight="bold" />}
+          </button>
+        </div>
       </div>
 
       {/* Overlay saat mobile menu terbuka */}

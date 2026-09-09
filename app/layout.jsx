@@ -2,6 +2,7 @@ import './globals.css';
 import Navbar from '@/components/Navbar/Navbar';
 import Footer from '@/components/Footer/Footer';
 import AOSProvider from '@/components/AOSProvider/AOSProvider';
+import VisitorTracker from '@/components/VisitorTracker/VisitorTracker';
 
 /**
  * Metadata global — SEO default untuk seluruh website.
@@ -44,6 +45,7 @@ export default function RootLayout({ children }) {
     <html lang="id">
       <body>
         <AOSProvider>
+          <VisitorTracker />
           <Navbar />
           <main>{children}</main>
           <Footer />

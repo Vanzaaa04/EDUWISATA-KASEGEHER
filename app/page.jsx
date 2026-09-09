@@ -5,6 +5,7 @@ import StatCard from '@/components/StatCard/StatCard';
 import DestinationCard from '@/components/DestinationCard/DestinationCard';
 import ProductCard from '@/components/ProductCard/ProductCard';
 import CTABanner from '@/components/CTABanner/CTABanner';
+import VisitorCounter from '@/components/VisitorCounter/VisitorCounter';
 import { sectionContent } from '@/data/siteContent';
 import { villageStats } from '@/data/villageStats';
 import { destinations } from '@/data/destinations';
@@ -56,6 +57,12 @@ export default function HomePage() {
               />
             ))}
           </div>
+
+          {/* Counter pengunjung website */}
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <VisitorCounter />
+          </div>
+
           <div className="home-section__cta" data-aos="fade-up" data-aos-delay="200">
             <Link href={sectionContent.aboutPreview.cta.href} className="btn-secondary">
               {sectionContent.aboutPreview.cta.label}
