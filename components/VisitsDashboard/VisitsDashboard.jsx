@@ -49,11 +49,12 @@ export default function VisitsDashboard({ adminToken }) {
     }
   }, [adminToken]);
 
-  // Helper: Format tanggal (Indonesia)
+  // Helper: Format tanggal (Indonesia, paksa ke WIB)
   const formatDateTime = (dateStr) => {
     if (!dateStr) return '';
     try {
-      return new Date(dateStr).toLocaleDateString('id-ID', {
+      return new Date(dateStr).toLocaleString('id-ID', {
+        timeZone: 'Asia/Jakarta',
         day: 'numeric',
         month: 'short',
         year: 'numeric',

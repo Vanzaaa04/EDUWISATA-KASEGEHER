@@ -103,12 +103,13 @@ export async function GET(request) {
 
     // === ISI DATA ===
     (visits || []).forEach((visit, index) => {
-      // Format tanggal
+      // Format tanggal (Paksa ke zona waktu WIB/Jakarta)
       let dateStr = '';
       try {
-        dateStr = new Date(visit.created_at).toLocaleDateString('id-ID', {
+        dateStr = new Date(visit.created_at).toLocaleString('id-ID', {
+          timeZone: 'Asia/Jakarta',
           day: 'numeric',
-          month: 'long',
+          month: 'short',
           year: 'numeric',
           hour: '2-digit',
           minute: '2-digit',
