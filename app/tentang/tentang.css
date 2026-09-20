@@ -235,7 +235,7 @@
   left: 0;
   right: 0;
   padding: var(--space-md);
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  background: rgba(0, 0, 0, 0.75);
   color: var(--color-white);
 }
 
@@ -243,11 +243,12 @@
   font-size: var(--fs-body);
   font-weight: 700;
   margin-bottom: 4px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .tentang-galeri__caption p {
   font-size: var(--fs-small);
-  opacity: 0.85;
+  opacity: 0.9;
   line-height: 1.4;
 }
 
