@@ -67,18 +67,22 @@ export default function HeroCarousel() {
           key={slide.id}
           className={`hero-carousel__slide ${index === currentSlide ? 'hero-carousel__slide--active' : ''}`}
         >
-          {/* Background image dengan Ken Burns effect */}
-          <div className="hero-carousel__image-wrapper">
-            <Image
-              src={slide.image}
-              alt={slide.title}
-              fill
-              priority={index === 0}
-              sizes="100vw"
-              className="hero-carousel__image"
-              quality={85}
-            />
-          </div>
+          {/* Background: foto biasa atau gradient untuk product-grid */}
+          {slide.type === 'product-grid' ? (
+            <div className="hero-carousel__product-bg" />
+          ) : (
+            <div className="hero-carousel__image-wrapper">
+              <Image
+                src={slide.image}
+                alt={slide.title}
+                fill
+                priority={index === 0}
+                sizes="100vw"
+                className="hero-carousel__image"
+                quality={85}
+              />
+            </div>
+          )}
 
           {/* Overlay gelap untuk kontras teks */}
           <div className="hero-carousel__overlay" />
@@ -87,7 +91,30 @@ export default function HeroCarousel() {
           <div className="hero-carousel__content container">
             <h1 className="hero-carousel__title">{slide.title}</h1>
             <p className="hero-carousel__subtitle">{slide.subtitle}</p>
-            <p className="hero-carousel__description">{slide.description}</p>
+
+            {/* Grid poster produk (hanya untuk slide product-grid) */}
+            {slide.type === 'product-grid' && slide.products && (
+              <div className="hero-carousel__product-grid">
+                {slide.products.map((productSrc, i) => (
+                  <div key={i} className="hero-carousel__product-item">
+                    <Image
+                      src={productSrc}
+                      alt={`Produk herbal ${i + 1}`}
+                      width={280}
+                      height={360}
+                      className="hero-carousel__product-img"
+                      quality={85}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Deskripsi (sembunyikan di slide product-grid agar tidak terlalu ramai) */}
+            {slide.type !== 'product-grid' && (
+              <p className="hero-carousel__description">{slide.description}</p>
+            )}
+
             <div className="hero-carousel__actions">
               {slide.cta.map((action) => (
                 <Link

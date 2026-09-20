@@ -11,7 +11,7 @@ export const siteIdentity = {
     'https://www.google.com/maps/search/?api=1&query=Kebonagung,+Sukolelo,+Prigen,+Pasuruan+Regency,+East+Java+67157',
 };
 
-// Narasi hero carousel (3 slide)
+// Narasi hero carousel (6 slide dengan foto asli)
 export const heroSlides = [
   {
     id: 1,
@@ -27,21 +27,67 @@ export const heroSlides = [
   },
   {
     id: 2,
-    title: 'Smart Biodome',
-    subtitle: 'Teknologi Pertanian Masa Depan',
+    title: 'Smart Biodome & Kebun Herbal',
+    subtitle: 'Pusat Budidaya Tanaman Herbal Modern',
     description:
-      'Rumah kaca geodesik berteknologi modern yang menjadi pusat budidaya tanaman herbal dan edukasi pertanian cerdas.',
-    cta: [{ label: 'Lihat Semua Destinasi', href: '/destinasi', variant: 'primary' }],
+      'Greenhouse berteknologi Smart Biodome menjadi pusat budidaya tanaman herbal dan edukasi pertanian cerdas. Nikmati pengalaman belajar langsung di tengah kebun herbal Desa Sukolelo.',
+    cta: [
+      { label: 'Lihat Semua Destinasi', href: '/destinasi', variant: 'primary' },
+    ],
     image: '/images/hero/hero-2.jpg',
   },
   {
     id: 3,
-    title: 'Inovasi Sehat dari Tangan Kami',
-    subtitle: 'Produk Herbal Unggulan',
+    title: 'Produk Herbal Unggulan',
+    subtitle: 'Inovasi Sehat dari Desa Sukolelo',
     description:
-      'Produk herbal unggulan yang diracik dari kekayaan alam Desa Sukolelo, dibuat dengan cinta dan kearifan lokal.',
-    cta: [{ label: 'Lihat Produk Kami', href: '/produk', variant: 'primary' }],
-    image: '/images/hero/hero-3.jpg',
+      'Kombucha Bunga Telang, Aserehe, dan Gummy Kunyit. Produk herbal yang diracik dari kekayaan alam lokal, dibuat dengan cinta dan kearifan desa.',
+    cta: [
+      { label: 'Lihat Produk Kami', href: '/produk', variant: 'primary' },
+    ],
+    // Slide tipe khusus: tampilkan grid 3 poster produk
+    type: 'product-grid',
+    products: [
+      '/images/hero/product-1.jpg',
+      '/images/hero/product-2.jpg',
+      '/images/hero/product-3.jpg',
+    ],
+    image: null, // Tidak pakai background foto, pakai gradient
+  },
+  {
+    id: 4,
+    title: 'Keindahan Alam Sukolelo',
+    subtitle: 'Hamparan Sawah di Lereng Prigen',
+    description:
+      'Panorama sawah terasering yang memukau, terbentang hijau keemasan di bawah sinar matahari pagi. Keindahan alam autentik lereng Pegunungan Prigen.',
+    cta: [
+      { label: 'Tentang Desa', href: '/tentang', variant: 'primary' },
+      { label: 'Pesan Tiket Sekarang', href: '/tiket', variant: 'secondary' },
+    ],
+    image: '/images/hero/hero-4.jpg',
+  },
+  {
+    id: 5,
+    title: 'Desa Mandiri Energi',
+    subtitle: 'Infrastruktur Modern Berbasis Energi Terbarukan',
+    description:
+      'Panel surya dan jalan desa yang asri menunjukkan semangat Desa Sukolelo menuju kemandirian energi. Inovasi dan kearifan lokal berjalan beriringan.',
+    cta: [
+      { label: 'Jelajahi Destinasi', href: '/destinasi', variant: 'primary' },
+    ],
+    image: '/images/hero/hero-5.jpg',
+  },
+  {
+    id: 6,
+    title: 'Pertanian Berkelanjutan',
+    subtitle: 'Kekayaan Alam yang Terus Dijaga',
+    description:
+      'Hamparan lahan pertanian yang subur dan hijau, menggambarkan komitmen masyarakat Desa Sukolelo dalam menjaga kelestarian alam dan tradisi bertani.',
+    cta: [
+      { label: 'Tentang Desa', href: '/tentang', variant: 'primary' },
+      { label: 'Pesan Tiket Sekarang', href: '/tiket', variant: 'secondary' },
+    ],
+    image: '/images/hero/hero-6.jpg',
   },
 ];
 

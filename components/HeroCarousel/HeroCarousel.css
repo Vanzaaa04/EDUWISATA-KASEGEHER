@@ -184,6 +184,54 @@
   background: rgba(255, 255, 255, 0.7);
 }
 
+/* === PRODUCT GRID (Slide Khusus Produk) === */
+
+/* Background gradient hijau gelap untuk slide produk */
+.hero-carousel__product-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-dark, #0a3d1a) 0%,
+    var(--color-primary, #1a6b3c) 40%,
+    #0d4a28 70%,
+    #062d14 100%
+  );
+}
+
+/* Grid 3 poster produk */
+.hero-carousel__product-grid {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  align-items: center;
+  margin-bottom: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* Kartu setiap poster produk */
+.hero-carousel__product-item {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.hero-carousel__product-item:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+  border-color: var(--color-accent);
+}
+
+/* Gambar poster produk */
+.hero-carousel__product-img {
+  display: block;
+  width: 220px;
+  height: auto;
+  object-fit: cover;
+}
+
 /* === MOBILE RESPONSIVE === */
 @media (max-width: 767px) {
   .hero-carousel {
@@ -207,5 +255,18 @@
 
   .hero-carousel__arrow--right {
     right: var(--space-xs);
+  }
+
+  /* Product grid mobile: lebih kecil, tetap 3 kolom */
+  .hero-carousel__product-grid {
+    gap: var(--space-xs);
+  }
+
+  .hero-carousel__product-img {
+    width: 100px;
+  }
+
+  .hero-carousel__product-item {
+    border-radius: var(--radius-sm);
   }
 }

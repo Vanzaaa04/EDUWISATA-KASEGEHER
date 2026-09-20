@@ -40,7 +40,7 @@ export default function TentangDesaPage() {
       <section className="tentang-hero">
         <div className="tentang-hero__image-wrapper">
           <Image
-            src="/images/tentang/desa-sukolelo.jpg"
+            src="/images/hero/hero-1.jpg"
             alt="Panorama Desa Sukolelo di lereng pegunungan Prigen"
             fill
             priority
@@ -131,6 +131,74 @@ export default function TentangDesaPage() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* 5. Galeri Foto Desa */}
+      <section className="tentang-galeri section-padding">
+        <div className="container">
+          <SectionHeader
+            title="Galeri Desa Sukolelo"
+            subtitle="Pesona alam dan kehidupan desa di lereng Pegunungan Prigen."
+          />
+          <div className="tentang-galeri__grid">
+            <div className="tentang-galeri__item tentang-galeri__item--large" data-aos="fade-up">
+              <Image
+                src="/images/tentang/desa-panorama.jpg"
+                alt="Panorama Desa Sukolelo dengan latar belakang pegunungan Prigen"
+                width={800}
+                height={450}
+                className="tentang-galeri__img"
+                quality={85}
+              />
+              <div className="tentang-galeri__caption">
+                <h4>Panorama Desa Sukolelo</h4>
+                <p>Pemandangan desa dengan latar belakang Pegunungan Prigen yang megah</p>
+              </div>
+            </div>
+            <div className="tentang-galeri__item" data-aos="fade-up" data-aos-delay="100">
+              <Image
+                src="/images/tentang/desa-sawah.jpg"
+                alt="Sawah terasering Desa Sukolelo saat golden hour"
+                width={800}
+                height={450}
+                className="tentang-galeri__img"
+                quality={85}
+              />
+              <div className="tentang-galeri__caption">
+                <h4>Hamparan Sawah</h4>
+                <p>Sawah terasering yang keemasan di lereng Prigen</p>
+              </div>
+            </div>
+            <div className="tentang-galeri__item" data-aos="fade-up" data-aos-delay="200">
+              <Image
+                src="/images/tentang/desa-jalan.jpg"
+                alt="Jalan desa dan panel surya di Desa Sukolelo"
+                width={800}
+                height={450}
+                className="tentang-galeri__img"
+                quality={85}
+              />
+              <div className="tentang-galeri__caption">
+                <h4>Infrastruktur Desa</h4>
+                <p>Jalan desa yang asri dilengkapi panel surya</p>
+              </div>
+            </div>
+            <div className="tentang-galeri__item" data-aos="fade-up" data-aos-delay="300">
+              <Image
+                src="/images/tentang/desa-pertanian.jpg"
+                alt="Hamparan lahan pertanian Desa Sukolelo"
+                width={800}
+                height={450}
+                className="tentang-galeri__img"
+                quality={85}
+              />
+              <div className="tentang-galeri__caption">
+                <h4>Lahan Pertanian</h4>
+                <p>Hamparan pertanian subur yang menjadi tumpuan kehidupan desa</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
