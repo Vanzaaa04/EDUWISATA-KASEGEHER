@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# file mentah (foto asli berukuran besar, tidak perlu di repo)
+/data beranda/
+/scripts/
